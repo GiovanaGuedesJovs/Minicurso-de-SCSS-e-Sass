@@ -1,0 +1,104 @@
+// @for $i from 1 through 5 { 
+//     .color-#{$i} {
+//       background-color: hsl(
+//         floor(random(360)),
+//         floor(random(100) * 1%),
+//         floor(random(100) * 1%));
+//     }
+// }
+
+@function ftcolor($bgcolor){
+    @if(lightness($bgcolor) > 50){ 
+        @return black;
+    }@else{
+        @return white;       
+    }
+}
+
+@mixin bgcolor ($color) {
+    background-color: $color;
+    color: ftcolor($color)
+}
+
+$fundo-claro: white;
+$texto-preto: black;
+$fundo-escuro: black;
+$texto-branco: white;
+
+@mixin tema-cores($tema){
+    @if $tema {
+        background-color: $fundo-claro;
+        color: $texto-preto;
+    } @else {
+        background-color: $fundo-escuro;
+        color: $texto-branco;
+    }
+}
+
+body{
+    @include tema-cores($tema: true);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+}
+
+article{
+    width: 95%;
+    margin: 50px auto;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: justify;
+    justify-content: center;
+    padding: 15px 0;
+    border: solid rgb(237, 237, 237) 1px;
+    //height: random(100) * 1px;
+}
+
+section{
+    text-align: justify;
+    display: block;
+    width: 47%;
+    border-radius: 5px;
+    border: solid 1px rgb(124, 124, 124);
+    // @include bgcolor(white);
+    // background: grey;
+    // &:hover {
+    //   background: darken(grey, 10%);
+    // }
+}
+
+.left{
+    margin-right: 15px;
+}
+
+.right{
+    margin-left: 15px;
+}
+
+section p{
+    padding: 0 20px;
+}
+
+h1{
+    background-color: $fundo-escuro;
+    text-align: center;
+    padding: 10px;
+    color: $texto-branco;
+}
+
+h1.titulo{
+    color: $texto-preto;
+    background-color: $fundo-claro;
+}
+
+article#segundo section{
+    width: 30%;
+    margin: 0 20px;
+}
+
+@media only screen and (max-device-width: 1350px) {
+    article#segundo section{
+        width: 100%;
+        margin: 20px 20px;
+    }
+}
+  
